@@ -10,7 +10,6 @@
       return _.chain(arguments)
         .toArray()
         .rest()
-        .flatten()
         .value();
     }
     

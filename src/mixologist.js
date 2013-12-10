@@ -8,7 +8,6 @@ var _extractMixins = function() {
   return _.chain(arguments)
     .toArray()
     .rest()
-    .flatten()
     .value();
 }
 
