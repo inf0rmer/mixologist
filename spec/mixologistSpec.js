@@ -5,6 +5,8 @@ define(['mixologist', 'jquery', 'underscore', 'backbone'], function(Mixologist) 
     var A, B, C, ViewClass;
 
     beforeEach(function(){
+      Mixologist.mixins = {};
+
       A = {
         aMethod: function(){
 
@@ -51,6 +53,23 @@ define(['mixologist', 'jquery', 'underscore', 'backbone'], function(Mixologist) 
       expect(_.keys(ViewClass.prototype['events']).length).toEqual(2);
       expect(ViewClass.prototype['events']['command']).toBeDefined();
       expect(ViewClass.prototype['events']['order']).toBeDefined();
+    });
+
+    it('mixes in mixins passed as strings that exist in Mixologist.mixins', function() {
+      Mixologist.mixins['D'] = {
+        dMethod: function() {}
+      };
+
+      Mixologist.mix(ViewClass, 'D');
+      expect(ViewClass.prototype['dMethod']).toBeDefined();
+    });
+
+    it('throws an Error if a string mixin does not exist', function() {
+      var error = new Error('The mixin "D" is invalid');
+
+      expect(function(){
+        Mixologist.mix(ViewClass, 'D');
+      }).toThrow(error);
     });
 
     describe('Collisions', function() {

@@ -14,7 +14,7 @@
         .value();
     }
     
-    // Main function
+    // Main mixing function
     Mixologist.mix = function(klass) {
       var mixins, obj, collisions;
     
@@ -22,10 +22,18 @@
       obj = klass.prototype || klass;
       collisions = {};
     
-      _(mixins).each(function(mixin) {
+      _(mixins).each(function(mixin, index) {
+    
+        if (_.isString(mixin)) {
+          mixin = Mixologist.mixins[mixin];
+    
+          if (!mixin) {
+            throw new Error('The mixin "' + mixins[index] + '" is invalid')
+          }
+        }
+    
         _(mixin).each(function(value, key) {
           if (_.isFunction(value)) {
-    
             if (obj[key]) {
               collisions[key] = collisions[key] || [obj[key]];
               collisions[key].push(value);
@@ -38,6 +46,7 @@
         });
       });
     
+      // Handle collisions
       _(collisions).each(function(fns, name) {
         obj[name] = function() {
           var self = this,
