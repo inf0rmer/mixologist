@@ -58,6 +58,9 @@ module.exports = function(grunt) {
         globals: {
           Mixologist: false,
           _: false,
+          Backbone: false,
+          $: false,
+          jQuery: false,
           console: false,
           expect: false,
           describe: false,
@@ -71,7 +74,8 @@ module.exports = function(grunt) {
           test: false,
           jasmine: false,
           module: false,
-          require: false
+          require: false,
+          define: false
         }
       }
     },
@@ -85,7 +89,10 @@ module.exports = function(grunt) {
             requireConfig: {
               baseUrl: '.',
               paths: {
-                "revisionist": "dist/revisionist"
+                "mixologist": "dist/mixologist",
+                "underscore": "bower_components/underscore/underscore",
+                "backbone": "bower_components/backbone/backbone",
+                "jquery": "bower_components/jquery/jquery"
               }
             }
           }
