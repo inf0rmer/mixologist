@@ -37,6 +37,21 @@
           }
         });
       });
+    
+      _(collisions).each(function(fns, name) {
+        obj[name] = function() {
+          var self = this,
+            args = arguments,
+            returnable;
+    
+          _(fns).each(function(value) {
+            var returned = _.isFunction(value) ? value.apply(self, args) : value;
+            returnable = _.isUndefined(returned) ? returnable : returned;
+          });
+    
+          return returnable;
+        }
+      });
     }
 
     //exports to multiple environments

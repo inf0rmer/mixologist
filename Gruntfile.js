@@ -75,7 +75,8 @@ module.exports = function(grunt) {
           jasmine: false,
           module: false,
           require: false,
-          define: false
+          define: false,
+          spyOn: false
         }
       }
     },

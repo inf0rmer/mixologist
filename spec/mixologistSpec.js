@@ -53,5 +53,60 @@ define(['mixologist', 'jquery', 'underscore', 'backbone'], function(Mixologist) 
       expect(ViewClass.prototype['events']['order']).toBeDefined();
     });
 
+    describe('Collisions', function() {
+      it('executes mixed in conflicting functions by the order they were mixed in', function() {
+        var aSpy, bSpy, vSpy;
+
+        A = {
+          initialize: function() {}
+        };
+
+        B = {
+          initialize: function() {}
+        };
+
+        ViewClass = Backbone.View.extend({
+          initialize: function() {}
+        });
+
+        aSpy = spyOn(A, 'initialize');
+        bSpy = spyOn(B, 'initialize');
+        vSpy = spyOn(ViewClass.prototype, 'initialize');
+
+        Mixologist.mix(ViewClass, A, B);
+
+        new ViewClass();
+
+        expect(aSpy).toHaveBeenCalled();
+        expect(bSpy).toHaveBeenCalled();
+        expect(vSpy).toHaveBeenCalled();
+      });
+
+      it('returns the last non-undefined value returned from a conflicting function', function() {
+        var view, pony;
+
+        A = {
+          makePony: function() {
+            return 'Pony';
+          }
+        };
+
+        B = {
+          makePony: function() {}
+        };
+
+        ViewClass = Backbone.View.extend({
+          makePony: function() {}
+        });
+
+        Mixologist.mix(ViewClass, A, B);
+
+        view = new ViewClass();
+        pony = view.makePony();
+
+        expect(pony).toEqual('Pony');
+      });
+    });
+
   });
 });

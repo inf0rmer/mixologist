@@ -12,7 +12,7 @@ var _extractMixins = function() {
     .value();
 }
 
-// Main function
+// Main mixing function
 Mixologist.mix = function(klass) {
   var mixins, obj, collisions;
 
@@ -34,5 +34,20 @@ Mixologist.mix = function(klass) {
         obj[key] = _.extend({}, value, obj[key] || {});
       }
     });
+  });
+
+  _(collisions).each(function(fns, name) {
+    obj[name] = function() {
+      var self = this,
+        args = arguments,
+        returnable;
+
+      _(fns).each(function(value) {
+        var returned = _.isFunction(value) ? value.apply(self, args) : value;
+        returnable = _.isUndefined(returned) ? returnable : returned;
+      });
+
+      return returnable;
+    }
   });
 }
