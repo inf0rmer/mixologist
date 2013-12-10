@@ -1,0 +1,22 @@
+{
+  "name": "mixologist",
+  "version": "0.0.0",
+  "homepage": "https://github.com/inf0rmer/mixologist",
+  "authors": [
+    "Bruno Abrantes <inf0rmer.realm@gmail.com>"
+  ],
+  "description": "A Backbone mixin manager",
+  "main": "dist/mixologist.js",
+  "keywords": [
+    "backbone",
+    "mixin"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

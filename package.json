@@ -1,0 +1,32 @@
+{
+  "name": "mixologist",
+  "version": "0.0.0",
+  "description": "A Backbone mixin manager",
+  "main": "dist/mixologist.js",
+  "scripts": {
+    "test": "grunt test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/inf0rmer/mixologist.git"
+  },
+  "keywords": [
+    "backbone",
+    "mixin"
+  ],
+  "author": "Bruno Abrantes <bruno@brunoabrantes.com> (http://brunoabrantes.com/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/inf0rmer/mixologist/issues"
+  },
+  "homepage": "https://github.com/inf0rmer/mixologist",
+  "devDependencies": {
+    "grunt-contrib-watch": "~0.5.3",
+    "grunt": "~0.4.2",
+    "grunt-contrib-uglify": "~0.2.7",
+    "grunt-contrib-jasmine": "~0.5.2",
+    "grunt-rigger": "~0.5.0",
+    "grunt-contrib-jshint": "~0.7.2",
+    "grunt-template-jasmine-requirejs": "~0.1.8"
+  }
+}
