@@ -1,5 +1,7 @@
 # Mixologist
 
+[![Build Status](https://travis-ci.org/inf0rmer/mixologist.png?branch=master)](https://travis-ci.org/inf0rmer/mixologist)
+
 A simple mixin manager, designed to operate with Backbone but framework agnostic enough to be used with other stuff. The only dependency is [Underscore](http://underscorejs.org/).
 
 ## How does it work?
