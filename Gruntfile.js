@@ -76,27 +76,37 @@ module.exports = function(grunt) {
           module: false,
           require: false,
           define: false,
-          spyOn: false
+          spyOn: false,
+          requirejs: false
         }
       }
     },
 
     jasmine: {
       test: {
+        src: ['./src/mixologist.js'],
         options: {
           specs: 'spec/*Spec.js',
-          template: require('grunt-template-jasmine-requirejs'),
+          template: require('grunt-template-jasmine-istanbul'),
           templateOptions: {
-            requireConfig: {
-              baseUrl: '.',
-              paths: {
-                "mixologist": "dist/mixologist",
-                "underscore": "bower_components/underscore/underscore",
-                "backbone": "bower_components/backbone/backbone",
-                "jquery": "bower_components/jquery/jquery"
+            coverage: './reports/coverage.json',
+            report: [
+              {
+                type: 'html',
+                options: {
+                  dir: './reports/coverage'
+                }
+              },
+              {
+                type: 'text-summary'
               }
-            }
-          }
+            ]
+          },
+          vendor: [
+            './bower_components/underscore/underscore.js',
+            './bower_components/jquery/jquery.js',
+            './bower_components/backbone/backbone.js'
+          ]
         }
       }
     }
