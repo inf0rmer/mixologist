@@ -1,6 +1,6 @@
 # Mixologist
 
-A simple mixin manager, designed to operate with Backbone but framework agnostic enough to be used with other frameworks. The only dependency is [Underscore](http://underscorejs.org/).
+A simple mixin manager, designed to operate with Backbone but framework agnostic enough to be used with other stuff. The only dependency is [Underscore](http://underscorejs.org/).
 
 ## How does it work?
 The main ```Mixologist.mix``` function accepts any number of arguments. The first argument is the object that your mixins will be composed into, and the rest are your mixins.
