@@ -1,24 +1,41 @@
 (function(global){
 
     // The global object
-    var Mixologist = {};
+    var Mixologist = {},
+      _extractMixins,
+      _handleCollision;
     
     // The mixin cache
     Mixologist.mixins = {};
     
-    var _extractMixins = function() {
+    _extractMixins = function() {
       return _.chain(arguments)
         .toArray()
         .rest()
         .value();
     }
     
+    _handleCollision = function(fns, name) {
+      this[name] = function() {
+        var self = this,
+          args = arguments,
+          returnable;
+    
+        _(fns).each(function(value) {
+          var returned = _.isFunction(value) ? value.apply(self, args) : value;
+          returnable = _.isUndefined(returned) ? returnable : returned;
+        });
+    
+        return returnable;
+      }
+    }
+    
     // Main mixing function
-    Mixologist.mix = function(klass) {
+    Mixologist.mix = function(obj) {
       var mixins, obj, collisions;
     
       mixins = _extractMixins.apply(this, arguments);
-      obj = klass.prototype || klass;
+      obj = obj.prototype || obj;
       collisions = {};
     
       _(mixins).each(function(mixin, index) {
@@ -46,20 +63,7 @@
       });
     
       // Handle collisions
-      _(collisions).each(function(fns, name) {
-        obj[name] = function() {
-          var self = this,
-            args = arguments,
-            returnable;
-    
-          _(fns).each(function(value) {
-            var returned = _.isFunction(value) ? value.apply(self, args) : value;
-            returnable = _.isUndefined(returned) ? returnable : returned;
-          });
-    
-          return returnable;
-        }
-      });
+      _(collisions).each(_handleCollision, obj);
     }
 
     //exports to multiple environments
