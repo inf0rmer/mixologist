@@ -4,6 +4,14 @@
 
 A simple mixin manager, designed to operate with Backbone but framework agnostic enough to be used with other stuff. The only dependency is [Underscore](http://underscorejs.org/).
 
+## Get it
+
+### Through [Bower](http://bower.io/)
+```bower install mixologist```
+
+### Through [NPM](https://npmjs.org/)
+```npm install mixologist```
+
 ## How does it work?
 The main ```Mixologist.mix``` function accepts any number of arguments. The first argument is the object that your mixins will be composed into, and the rest are your mixins.
 
